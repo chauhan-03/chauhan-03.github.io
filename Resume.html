@@ -7,15 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1633;
-    --surface: rgba(22, 28, 58, 0.55);
-    --border: rgba(140, 160, 255, 0.16);
+    --bg: #07080c;
+    --surface: rgba(16, 19, 28, 0.72);
+    --border: rgba(255, 255, 255, 0.08);
     --accent: #5bffb5;
     --accent2: #4fa8ff;
     --text: #d6dce8;
-    --muted: #a3aed0;
+    --muted: #8b95ad;
     --heading: #ffffff;
-    --tag-bg: rgba(40, 50, 95, 0.55);
+    --tag-bg: rgba(26, 32, 48, 0.75);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -237,7 +237,7 @@
   }
 
   .tag:hover { border-color: var(--accent); color: var(--accent); cursor: default; }
-  .tag.hot { border-color: rgba(91,255,181,0.35); background: rgba(91,255,181,0.10); color: var(--accent); }
+  .tag.hot { border-color: rgba(91,255,181,0.25); background: rgba(91,255,181,0.06); color: var(--accent); }
 
   /* ── METRIC BARS ── */
   .metric-row {
@@ -307,29 +307,27 @@
   .contact-block a, .summary { overflow-wrap: anywhere; }
 
   /* ── LIVE BACKGROUND ── */
-  body { background: linear-gradient(125deg, #0f1633, #1c1450, #0b2a44, #2a1240); background-size: 400% 400%;
-         animation: drift 28s ease-in-out infinite; overflow-x: hidden; }
-  @keyframes drift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  body { background: var(--bg); overflow-x: hidden; }
   .aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .aurora i { position: absolute; width: 46vmax; height: 46vmax; border-radius: 50%; filter: blur(90px); opacity: 0.38; }
+  .aurora i { position: absolute; width: 46vmax; height: 46vmax; border-radius: 50%; filter: blur(110px); opacity: 0.13; }
   .aurora i:nth-child(1) { background: #5bffb5; top: -14vmax; left: -10vmax; animation: float1 26s ease-in-out infinite; }
   .aurora i:nth-child(2) { background: #4fa8ff; top: 30%; right: -16vmax; animation: float2 32s ease-in-out infinite; }
   .aurora i:nth-child(3) { background: #a66bff; bottom: -18vmax; left: 20%; animation: float3 30s ease-in-out infinite; }
-  .aurora i:nth-child(4) { background: #ff5fa2; top: 10%; left: 40%; width: 26vmax; height: 26vmax; opacity: 0.22; animation: float2 38s ease-in-out infinite reverse; }
+  .aurora i:nth-child(4) { background: #ff5fa2; top: 10%; left: 40%; width: 26vmax; height: 26vmax; animation: float2 38s ease-in-out infinite reverse; opacity: 0.07; }
   @keyframes float1 { 50% { transform: translate(18vmax, 14vmax) scale(1.15); } }
   @keyframes float2 { 50% { transform: translate(-16vmax, -10vmax) scale(0.9); } }
   @keyframes float3 { 50% { transform: translate(-12vmax, -16vmax) scale(1.2); } }
   #net { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
   .spot { position: fixed; z-index: 1; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%;
-          pointer-events: none; background: radial-gradient(circle, rgba(91,255,181,0.13), transparent 65%); left: -999px; top: -999px; }
+          pointer-events: none; background: radial-gradient(circle, rgba(91,255,181,0.06), transparent 65%); left: -999px; top: -999px; }
   .page { position: relative; z-index: 2; }
   .summary, .project { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
   .project { transition: border-color .25s, box-shadow .25s, transform .25s; }
-  .project:hover { box-shadow: 0 0 0 1px rgba(91,255,181,0.35), 0 18px 50px -18px rgba(91,255,181,0.35); transform: translateY(-2px); }
+  .project:hover { box-shadow: 0 0 0 1px rgba(91,255,181,0.22), 0 18px 50px -20px rgba(91,255,181,0.2); transform: translateY(-2px); }
   .name span { animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 50% { color: var(--accent2); text-shadow: 0 0 18px var(--accent2); } }
   @media (prefers-reduced-motion: reduce) {
-    body, .aurora i, .name span { animation: none; }
+    .aurora i, .name span { animation: none; }
     #net, .spot { display: none; }
   }
 
@@ -689,13 +687,13 @@
       const a = pts[i];
       for (let j = i + 1; j < pts.length; j++) {
         const b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < 130) { x.strokeStyle = `rgba(${a.c},${(1 - d / 130) * .35})`; x.lineWidth = .7;
+        if (d < 130) { x.strokeStyle = `rgba(${a.c},${(1 - d / 130) * .18})`; x.lineWidth = .7;
           x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke(); }
       }
       const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y);
-      if (dm < 180) { x.strokeStyle = `rgba(${a.c},${(1 - dm / 180) * .6})`; x.lineWidth = 1;
+      if (dm < 180) { x.strokeStyle = `rgba(${a.c},${(1 - dm / 180) * .35})`; x.lineWidth = 1;
         x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(mouse.x, mouse.y); x.stroke(); }
-      x.fillStyle = `rgba(${a.c},.85)`; x.beginPath(); x.arc(a.x, a.y, a.r, 0, 7); x.fill();
+      x.fillStyle = `rgba(${a.c},.55)`; x.beginPath(); x.arc(a.x, a.y, a.r, 0, 7); x.fill();
     }
     requestAnimationFrame(frame);
   })();
